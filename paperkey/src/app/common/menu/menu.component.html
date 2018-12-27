@@ -1,0 +1,20 @@
+<div class="layui-side layui-bg-black">
+  <div class="layui-side-scroll">
+    <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+    <ul class="layui-nav layui-nav-tree" lay-filter="test" style="cursor: pointer">
+      <li class="layui-nav-item" [appMouseOnMask]="parentIndex" (onMouseEventChange)="OnMouseChange($event)"
+          *ngFor="let menu of menus;let parentIndex = index" [class.layui-nav-itemed]="menu.isopen">
+        <a (click)="menu.isopen = !menu.isopen" href="{{menu.url}}">{{menu.name}}
+          <span *ngIf="menu.isParent" class="layui-nav-more"></span>
+        </a>
+        <dl class="layui-nav-child" *ngIf="menu.isParent">
+          <dd *ngFor="let childMenu of menu.childs;let childIndex = index" [class.layui-this]="childMenu.isSelected"
+              (click)="childMenuClic(parentIndex,childIndex)">
+            <a>{{childMenu.name}}</a></dd>
+        </dl>
+      </li>
+
+        <span class="layui-nav-bar"  id="mask"></span>
+    </ul>
+  </div>
+</div>
